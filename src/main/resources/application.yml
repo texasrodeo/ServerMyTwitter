@@ -60,6 +60,4 @@ security:
     - /api/**
   exposed-headers:
     - X-Xsrf-Token
-server:
-  address: 192.168.3.3
-  port: 8080
+
