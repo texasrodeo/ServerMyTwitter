@@ -1,0 +1,50 @@
+2021-12-28 20:35:44.657  INFO 43252 --- [main] com.mytwitter.server.ServerApplication   : Starting ServerApplication using Java 1.8.0_241 on LAPTOP-UJI6V9PV with PID 43252 (C:\Users\Mvideo787\IdeaProjects\serverMyTwitter\target\classes started by Mvideo787 in C:\Users\Mvideo787\IdeaProjects\serverMyTwitter)
+2021-12-28 20:35:44.660  INFO 43252 --- [main] com.mytwitter.server.ServerApplication   : No active profile set, falling back to default profiles: default
+2021-12-28 20:35:45.480  INFO 43252 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-12-28 20:35:45.487  INFO 43252 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-12-28 20:35:45.488  INFO 43252 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2021-12-28 20:35:45.589  INFO 43252 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-12-28 20:35:45.589  INFO 43252 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 882 ms
+2021-12-28 20:35:45.816  INFO 43252 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 696bfae2-57fd-4855-b13f-cab16878187b
+
+2021-12-28 20:35:45.909  INFO 43252 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@455824ad, org.springframework.security.web.context.SecurityContextPersistenceFilter@20749d9, org.springframework.security.web.header.HeaderWriterFilter@77134e08, org.springframework.web.filter.CorsFilter@7318daf8, org.springframework.security.web.authentication.logout.LogoutFilter@116a2108, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62628e78, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@a137d7a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70f31322, org.springframework.security.web.session.SessionManagementFilter@67110f71, org.springframework.security.web.access.ExceptionTranslationFilter@5445f5ba, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@12010fd1]
+2021-12-28 20:35:45.970 DEBUG 43252 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-12-28 20:35:46.010 DEBUG 43252 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2021-12-28 20:35:46.041 DEBUG 43252 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-12-28 20:35:46.050 DEBUG 43252 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-12-28 20:35:46.142  INFO 43252 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-12-28 20:35:46.148  INFO 43252 --- [main] com.mytwitter.server.ServerApplication   : Started ServerApplication in 2.023 seconds (JVM running for 3.75)
+2021-12-28 20:36:37.064  INFO 124096 --- [main] com.mytwitter.server.ServerApplication   : Starting ServerApplication using Java 1.8.0_241 on LAPTOP-UJI6V9PV with PID 124096 (C:\Users\Mvideo787\IdeaProjects\serverMyTwitter\target\classes started by Mvideo787 in C:\Users\Mvideo787\IdeaProjects\serverMyTwitter)
+2021-12-28 20:36:37.066  INFO 124096 --- [main] com.mytwitter.server.ServerApplication   : No active profile set, falling back to default profiles: default
+2021-12-28 20:36:37.857  INFO 124096 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-12-28 20:36:37.864  INFO 124096 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-12-28 20:36:37.864  INFO 124096 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2021-12-28 20:36:37.941  INFO 124096 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-12-28 20:36:37.941  INFO 124096 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 831 ms
+2021-12-28 20:36:38.164  INFO 124096 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 5393b3a7-0de4-4a25-8a91-cffa35ef5c33
+
+2021-12-28 20:36:38.262  INFO 124096 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@537c8c7e, org.springframework.security.web.context.SecurityContextPersistenceFilter@3bec2275, org.springframework.security.web.header.HeaderWriterFilter@62628e78, org.springframework.web.filter.CorsFilter@7308ffff, org.springframework.security.web.authentication.logout.LogoutFilter@4038cd3a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@60acd609, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@281ce6bb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6601cc93, org.springframework.security.web.session.SessionManagementFilter@4df39a88, org.springframework.security.web.access.ExceptionTranslationFilter@67110f71, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2b98b3bb]
+2021-12-28 20:36:38.322 DEBUG 124096 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-12-28 20:36:38.364 DEBUG 124096 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2021-12-28 20:36:38.400 DEBUG 124096 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-12-28 20:36:38.409 DEBUG 124096 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-12-28 20:36:38.502  INFO 124096 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-12-28 20:36:38.508  INFO 124096 --- [main] com.mytwitter.server.ServerApplication   : Started ServerApplication in 1.894 seconds (JVM running for 2.766)
+2021-12-28 20:36:52.228  INFO 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-12-28 20:36:52.229  INFO 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-12-28 20:36:52.229 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-12-28 20:36:52.229 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2021-12-28 20:36:52.229 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2021-12-28 20:36:52.230 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3179042b
+2021-12-28 20:36:52.230 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@6743745a
+2021-12-28 20:36:52.231 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-12-28 20:36:52.231  INFO 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-12-28 20:36:52.255 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/users/user?username=test2@gmail.com", parameters={masked}
+2021-12-28 20:36:52.258 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.mytwitter.server.web.api.users.UsersController#getUser(String)
+2021-12-28 20:36:55.866 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-12-28 20:36:55.867 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [User(id=test2@gmail.com, username=testUser2, email=test2@gmail.com, phone=null, avatarUrl=https://fi (truncated)...]
+2021-12-28 20:36:55.883 DEBUG 124096 --- [http-nio-192.168.3.3-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
