@@ -9,7 +9,6 @@ import com.mytwitter.server.business.auth.models.User;
 import com.mytwitter.server.exceptions.UserNotFoundException;
 import com.mytwitter.server.models.Post;
 import com.mytwitter.server.util.BusinessConstants;
-import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
