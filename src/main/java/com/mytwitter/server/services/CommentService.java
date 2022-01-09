@@ -7,6 +7,7 @@ import com.mytwitter.server.business.auth.models.User;
 import com.mytwitter.server.exceptions.PostNotFoundException;
 import com.mytwitter.server.exceptions.UserNotFoundException;
 import com.mytwitter.server.models.Comment;
+import com.mytwitter.server.models.Post;
 import com.mytwitter.server.util.BusinessConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,33 +26,39 @@ public class CommentService {
 
             CollectionReference posts = dbFirestore.collection(BusinessConstants.CollectionNames.POSTS_COLLECTION_NAME);
             DocumentReference postRef = posts.document(postId);
-            DocumentSnapshot postSnapshot = postRef.get().get();
+            ApiFuture<DocumentSnapshot> postSnapshotFuture = postRef.get();
+            DocumentSnapshot postSnapshot = postSnapshotFuture.get();
             if(postSnapshot.exists()){
                 CollectionReference comments = dbFirestore.collection(BusinessConstants.CollectionNames.COMMENTS_COLLECTION_NAME);
                 Query commentsForPostQuery = comments.whereEqualTo("postRef", postSnapshot.getReference());
 
-
                 ApiFuture<QuerySnapshot> commentsPostsQuerySnapshotApiFuture = commentsForPostQuery.get();
                 List<QueryDocumentSnapshot> postsComments = commentsPostsQuerySnapshotApiFuture.get().getDocuments();
 
-                List<Comment> result = new ArrayList<>();
+                List<Comment> allUserComments = new ArrayList<>();
 
-                for (int i = (page-1)*perPage; i < (page-1)*perPage+perPage; i++) {
-                    if(i<postsComments.size()){
-                        QueryDocumentSnapshot lastDoc = postsComments.get(i);
-                        Comment comment = lastDoc.toObject(Comment.class);
+                for (QueryDocumentSnapshot comment : postsComments) {
+                    Comment comment1 = comment.toObject(Comment.class);
+                    ApiFuture<DocumentSnapshot> future = comment1.getAuthorRef().get();
 
-                        ApiFuture<DocumentSnapshot> future = comment.getAuthorRef().get();
-
-                        DocumentSnapshot userSnapshot = future.get();
-                        if(userSnapshot.exists()){
-                            User author = userSnapshot.toObject(User.class);
-                            comment.setAuthor(author);
-                        }
-                        result.add(comment);
+                    DocumentSnapshot userSnapshot = future.get();
+                    if(userSnapshot.exists()){
+                        User author = userSnapshot.toObject(User.class);
+                        comment1.setAuthor(author);
                     }
+                    allUserComments.add(comment1);
                 }
-                return result;
+
+                int firstIndex = 0;
+                int lastIndex = perPage;
+                for (int i = 1; i < page; i++) {
+                    firstIndex = i*(perPage);
+                    lastIndex = firstIndex+(perPage);
+                }
+                if(lastIndex>allUserComments.size()){
+                    return allUserComments.subList(firstIndex, allUserComments.size());
+                }
+                return allUserComments.subList(firstIndex,lastIndex);
             }
             return null;
         }

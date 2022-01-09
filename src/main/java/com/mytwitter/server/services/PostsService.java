@@ -9,6 +9,7 @@ import com.mytwitter.server.business.auth.models.User;
 import com.mytwitter.server.exceptions.UserNotFoundException;
 import com.mytwitter.server.models.Post;
 import com.mytwitter.server.util.BusinessConstants;
+import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -102,27 +103,31 @@ public class PostsService {
 
             if (userDocument.exists()) {
                 User author = userDocument.toObject(User.class);
-                Query userPostsQuery = posts.whereEqualTo("authorRef", userDocument.getReference()).limit(perPage);
+                Query userPostsQuery = posts.whereEqualTo("authorRef", userDocument.getReference());
 
 
                 ApiFuture<QuerySnapshot> userPostsQuerySnapshotApiFuture = userPostsQuery.get();
                 List<QueryDocumentSnapshot> userPosts = userPostsQuerySnapshotApiFuture.get().getDocuments();
 
-                for (int i = 2; i <= page; i++) {
-                    QueryDocumentSnapshot lastDoc = userPosts.get(userPosts.size() - 1);
-                    Query secondPage = posts.startAfter(lastDoc).limit(perPage);
-                    userPostsQuerySnapshotApiFuture = secondPage.get();
-                    userPosts = userPostsQuerySnapshotApiFuture.get().getDocuments();
-                }
 
-                List<Post> result = new ArrayList<>();
+                List<Post> allUserPosts = new ArrayList<>();
 
                 for (QueryDocumentSnapshot document : userPosts) {
                     Post post = document.toObject(Post.class);
                     post.setAuthor(author);
-                    result.add(post);
+                    allUserPosts.add(post);
                 }
-                return result;
+
+                int firstIndex = 0;
+                int lastIndex = perPage;
+                for (int i = 1; i < page; i++) {
+                    firstIndex = i*(perPage);
+                    lastIndex = firstIndex+(perPage);
+                }
+                if(lastIndex>allUserPosts.size()){
+                    return allUserPosts.subList(firstIndex, allUserPosts.size());
+                }
+                return allUserPosts.subList(firstIndex,lastIndex);
             }
             return null;
         } catch (Exception e) {
