@@ -6,6 +6,8 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.mytwitter.server.business.auth.models.User;
+import com.mytwitter.server.exceptions.IncorrrectLikeStatusException;
+import com.mytwitter.server.exceptions.PostNotFoundException;
 import com.mytwitter.server.exceptions.UserNotFoundException;
 import com.mytwitter.server.models.Post;
 import com.mytwitter.server.util.BusinessConstants;
@@ -178,5 +180,74 @@ public class PostsService {
 
 
 
+    }
+
+    public void likePost(String postId, String userId, String likeStatus){
+        try{
+            if(validateLikeStatus(likeStatus)){
+                Firestore dbFirestore = FirestoreClient.getFirestore();
+
+                CollectionReference postsCollection = dbFirestore.collection(BusinessConstants.CollectionNames.POSTS_COLLECTION_NAME);
+                CollectionReference usersCollection = dbFirestore.collection(BusinessConstants.CollectionNames.USERS_COLLECTION_NAME);
+
+
+                DocumentReference userRef = usersCollection.document(userId);
+                DocumentSnapshot userDocument = userRef.get().get();
+                if(userDocument.exists()){
+                    DocumentReference postRef = postsCollection.document(postId);
+                    DocumentSnapshot postDocument = postRef.get().get();
+                    if(postDocument.exists()){
+                        switch (likeStatus){
+                            case BusinessConstants.LikeStatuses.active:
+                                addLike(postRef, userRef);
+                                break;
+                            case BusinessConstants.LikeStatuses.inactive:
+                                removeLike(postRef, userRef);
+                                break;
+                        }
+                    }
+                    else{
+                        throw new PostNotFoundException("Post with id = " + postId + " was not found");
+                    }
+
+                }
+                else{
+                    throw new UserNotFoundException("User with id = " + userId + " was not found");
+                }
+
+
+            }
+            else{
+                throw new IncorrrectLikeStatusException("Incorrect like status");
+            }
+        }
+        catch (Exception e){
+            logger.error("An error occurred in likePost method", e);
+        }
+
+
+    }
+
+    private void addLike(DocumentReference postRef, DocumentReference userRef){
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference likesCollection = dbFirestore.collection(BusinessConstants.CollectionNames.LIKES_COLLECTION_NAME);
+        Map<String, Object> data = new HashMap<>();
+        data.put("post", postRef);
+        data.put("user", userRef);
+        ApiFuture<DocumentReference> addedDocRef = likesCollection.add(data);
+    }
+
+    private void removeLike(DocumentReference postRef, DocumentReference userRef) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference likesCollection = dbFirestore.collection(BusinessConstants.CollectionNames.LIKES_COLLECTION_NAME);
+        Query likeQuery = likesCollection.whereEqualTo("user", userRef).whereEqualTo("post", postRef);
+        ApiFuture<QuerySnapshot> likeQuerySnapshotApiFuture = likeQuery.get();
+        DocumentSnapshot l =  likeQuerySnapshotApiFuture.get().getDocuments().get(0);
+
+        l.getReference().delete();
+    }
+
+    private Boolean validateLikeStatus(String status){
+        return status.equals(BusinessConstants.LikeStatuses.active) || status.equals(BusinessConstants.LikeStatuses.inactive);
     }
 }

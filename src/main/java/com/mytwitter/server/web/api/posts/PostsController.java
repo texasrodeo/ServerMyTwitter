@@ -3,6 +3,7 @@ package com.mytwitter.server.web.api.posts;
 import com.mytwitter.server.models.Post;
 import com.mytwitter.server.services.PostsService;
 import com.mytwitter.server.web.api.posts.payloads.AddPostPayload;
+import com.mytwitter.server.web.api.posts.payloads.LikePostPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,17 @@ public class PostsController {
     public ResponseEntity<String> addPost(@RequestBody AddPostPayload payload){
         try{
             postsService.addPost(payload.getAuthorId(), payload.getPostText(), payload.getImageUrl());
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/like")
+    public ResponseEntity<String> likePost(@RequestBody LikePostPayload payload){
+        try{
+            postsService.likePost(payload.getPostId(), payload.getUserId(), payload.getLikeStatus());
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         catch (Exception e){
