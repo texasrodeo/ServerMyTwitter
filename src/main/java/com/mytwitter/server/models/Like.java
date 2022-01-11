@@ -1,36 +1,28 @@
 package com.mytwitter.server.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.annotation.DocumentId;
-
 import com.mytwitter.server.business.auth.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Like {
     @DocumentId
+    @JsonIgnore
     String id;
 
     @JsonIgnore
-    DocumentReference authorRef;
+    DocumentReference user;
 
-    User author;
+    @JsonIgnore
+    DocumentReference post;
 
-    String text;
-
-    String imageUrl;
-
-    Timestamp creationDate;
-
-    List<Like> likes;
-
+    String userId;
 }

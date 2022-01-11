@@ -9,6 +9,7 @@ import com.mytwitter.server.business.auth.models.User;
 import com.mytwitter.server.exceptions.IncorrrectLikeStatusException;
 import com.mytwitter.server.exceptions.PostNotFoundException;
 import com.mytwitter.server.exceptions.UserNotFoundException;
+import com.mytwitter.server.models.Like;
 import com.mytwitter.server.models.Post;
 import com.mytwitter.server.util.BusinessConstants;
 import org.slf4j.Logger;
@@ -42,6 +43,7 @@ public class PostsService {
                     User author = authorShapshot.toObject(User.class);
                     post.setAuthor(author);
                 }
+                post.setLikes(getLikesForPost(documentReference));
                 return post;
             } else {
                 return null;
@@ -81,6 +83,7 @@ public class PostsService {
                     User author = authorShapshot.toObject(User.class);
                     post.setAuthor(author);
                 }
+                post.setLikes(getLikesForPost(document.getReference()));
                 result.add(post);
             }
 
@@ -117,6 +120,7 @@ public class PostsService {
                     Post post = document.toObject(Post.class);
                     post.setAuthor(author);
                     allUserPosts.add(post);
+                    post.setLikes(getLikesForPost(document.getReference()));
                 }
 
                 int firstIndex = 0;
@@ -155,6 +159,24 @@ public class PostsService {
             logger.error("An error occurred in getPostsCountForUser() method", e);
             return 0;
         }
+
+    }
+
+    private List<Like> getLikesForPost(DocumentReference postRef) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference likesCollection = dbFirestore.collection(BusinessConstants.CollectionNames.LIKES_COLLECTION_NAME);
+        Query likeQuery = likesCollection.whereEqualTo("post", postRef);
+        ApiFuture<QuerySnapshot> likeQuerySnapshotApiFuture = likeQuery.get();
+        List<QueryDocumentSnapshot> queryDocumentSnapshots =  likeQuerySnapshotApiFuture.get().getDocuments();
+
+        List<Like> res = new ArrayList<>();
+        for(QueryDocumentSnapshot queryDocumentSnapshot:  queryDocumentSnapshots){
+            Like l = queryDocumentSnapshot.toObject(Like.class);
+            l.setUserId(l.getUser().getId());
+            res.add(l);
+        }
+        return res;
+
 
     }
 
